@@ -43,19 +43,20 @@ const NavMid = () => {
     ];
   return (
     <div>
-      <ul className="flex flex-row lg:flex-col justify-center gap-8">
+      <ul className="flex flex-row items-center justify-center gap-0.5 sm:gap-2 lg:flex-col lg:gap-8">
         {navItems.map((item, index) => (
           <li key={index}>
             <a
               key={item.url}
               href={item.url}
-              className="group flex items-center gap-2 rounded-full p-3 text-white transition-colors duration-300 ease-out hover:bg-white/10 relative"
+              title={item.title}
+              className="group relative flex items-center gap-2 rounded-full p-2 text-white transition-colors duration-300 ease-out hover:bg-white/10 sm:p-3 lg:p-3"
             >
               <span className="shrink-0 text-xl transition-transform duration-300 ease-out group-hover:scale-110">
                 {item.icon}
               </span>
 
-              <span className="absolute top-1/2 right-full mr-2 -translate-y-1/2 max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 ease-out group-hover:max-w-50 group-hover:opacity-100 group-hover:translate-x-1">
+              <span className="absolute right-full top-1/2 mr-2 hidden -translate-y-1/2 max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 ease-out group-hover:max-w-50 group-hover:opacity-100 group-hover:translate-x-1 lg:block">
                 {item.title}
               </span>
             </a>
