@@ -11,6 +11,10 @@
   --font-orbitron: var(--orbitron-font);
 }
 
+html {
+  @apply scroll-smooth;
+}
+
 body {
   @apply mx-auto font-roboto;
 }

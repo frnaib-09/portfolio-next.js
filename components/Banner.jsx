@@ -4,6 +4,7 @@ import { useState } from "react";
 import Typewriter from "typewriter-effect";
 import { FaGithub, FaFacebook, FaLinkedin } from "react-icons/fa";
 import { BsInstagram } from "react-icons/bs";
+import { IoMailOpen, IoLogoWhatsapp } from "react-icons/io5";
 
 const Banner = () => {
   const [mouse, setMouse] = useState({ x: -200, y: -200 });
@@ -38,18 +39,28 @@ const Banner = () => {
       icon: <BsInstagram />,
       url: "https://instagram.com/code_with_foyjur/",
     },
+    {
+      name: "Mail",
+      icon: <IoMailOpen />,
+      url: "mailto:foyjurrafee99@gmail.com",
+    },
+    {
+      name: "WhatsApp",
+      icon: <IoLogoWhatsapp />,
+      url: "https://wa.me/8801748838133",
+    },
   ];
 
   return (
     <section
       id="banner"
       onMouseMove={handleMouseMove}
-      className="relative isolate min-h-[100svh] overflow-hidden bg-black px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
+      className="relative isolate min-h-svh overflow-hidden bg-black px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
     >
       {/* Grayscale background */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-20 bg-[url('/images/foyjurbg.jpg')] bg-cover bg-center bg-no-repeat "
+        className="fixed inset-0 -z-200 bg-[url('/images/foyjurbg.jpg')] bg-cover bg-center bg-no-repeat "
       />
 
       {/* Dark overlay */}
@@ -63,6 +74,23 @@ const Banner = () => {
           background: `radial-gradient(circle 220px at ${mouse.x}px ${mouse.y}px, rgba(255,255,255,0.12), transparent 80%)`,
         }}
       />
+
+      <div className="fixed top-20 left-1/2 -translate-1/2 w-full px-16">
+        <div className="grid grid-cols-12 justify-between items-center">
+          <div className="col-span-4">
+            <a href="#">
+              <img src="favicon.ico" alt="Logo" className="w-auto h-14" />
+            </a>
+          </div>
+          <div className="col-span-8 flex gap-8 justify-end">
+            {socialLinks.map((item, index) => (
+              <a key={index} href={item.url} className="text-3xl">
+                {item.icon}
+              </a>
+            ))}
+            </div>
+        </div>
+      </div>
 
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
@@ -79,22 +107,6 @@ const Banner = () => {
             <p className="mt-6 text-xs tracking-widest sm:text-sm md:text-base lg:text-lg">
               &bull; Building Scalable Web Applications
             </p>
-          </div>
-
-          {/* Social links */}
-          <div className="flex items-center gap-5 text-2xl sm:gap-6 md:absolute md:right-10 md:top-10 md:gap-8 md:text-3xl">
-            {socialLinks.map((item) => (
-              <a
-                key={item.name}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={item.name}
-                className="transition-transform duration-300 hover:-translate-y-1 hover:text-gray-400"
-              >
-                {item.icon}
-              </a>
-            ))}
           </div>
         </div>
       </div>

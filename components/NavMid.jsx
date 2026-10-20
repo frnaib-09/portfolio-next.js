@@ -18,27 +18,27 @@ const NavMid = () => {
       {
         icon: <FaIdCard />,
         title: "About",
-        url: "/about",
+        url: "#about",
       },
       {
         icon: <SlChart />,
         title: "Skills",
-        url: "/skills",
+        url: "#skills",
       },
       {
         icon: <LuFolderCode />,
         title: "Projects",
-        url: "/projects",
+        url: "#projects",
       },
       {
         icon: <FaRegComment />,
         title: "Testimonials",
-        url: "/testimonials",
+        url: "#testimonials",
       },
       {
         icon: <FaRegHandshake />,
         title: "Contact",
-        url: "/contact",
+        url: "#contact",
       },
     ];
   return (
