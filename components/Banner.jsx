@@ -84,9 +84,9 @@ const Banner = () => {
           <div className="col-span-6 md:col-span-4">
             <a href="#banner" aria-label="Go to home">
               <img
-                src="/favicon.ico"
+                src="/images/logo.png"
                 alt="Logo"
-                className="h-12 w-auto md:h-14"
+                className="h-12 w-auto md:h-16"
               />
             </a>
           </div>
@@ -104,7 +104,7 @@ const Banner = () => {
               className="relative z-10 text-white md:hidden"
             >
               <RiLinksFill
-                className={`text-3xl transition-transform duration-300 ${
+                className={`text-3xl transition-transform duration-300 hover:text-[#FF6602] ${
                   showSocials ? "rotate-45" : "rotate-0"
                 }`}
               />
@@ -140,7 +140,7 @@ const Banner = () => {
                   rel="noopener noreferrer"
                   aria-label={item.name}
                   title={item.name}
-                  className="text-2xl text-white transition-all duration-300 hover:-translate-y-1 hover:text-gray-300 md:text-3xl"
+                  className="text-2xl text-white transition-all duration-300 hover:-translate-y-1 hover:text-[#FF6602] md:text-3xl"
                 >
                   {item.icon}
                 </a>
@@ -154,7 +154,7 @@ const Banner = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
           <div className="md:col-span-8">
-            <h1 className="mt-40 text-[clamp(3.5rem,15vw,6rem)] font-semibold uppercase leading-[0.95] sm:text-7xl md:text-8xl lg:mt-0 lg:text-9xl">
+            <h1 className="mt-40 text-[clamp(3.5rem,15vw,6rem)] text-[#FF6602] font-semibold uppercase leading-[0.95] sm:text-7xl md:text-8xl lg:mt-0 lg:text-9xl">
               Foyjur
               <br />
               <span className="text-transparent [-webkit-text-stroke:1px_white]">

@@ -50,9 +50,9 @@ const NavMid = () => {
               key={item.url}
               href={item.url}
               title={item.title}
-              className="group relative flex items-center gap-2 rounded-full p-2 text-white transition-colors duration-300 ease-out hover:bg-white/10 sm:p-3 lg:p-3"
+              className="group relative flex items-center gap-2 rounded-full p-2 text-white hover:text-[#FF6602] transition-colors duration-300 ease-out hover:bg-white/10 sm:p-3 lg:p-3"
             >
-              <span className="shrink-0 text-xl transition-transform duration-300 ease-out group-hover:scale-110">
+              <span className="shrink-0 text-xl  transition-transform duration-300 ease-out group-hover:scale-110">
                 {item.icon}
               </span>
 
