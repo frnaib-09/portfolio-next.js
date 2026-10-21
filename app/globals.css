@@ -1,12 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #079FE3;
-  --color-cyan: #22D3EE;
-  --color-navy: #071522;
-  --color-surface: #102536;
-  --color-silver: #C7CED5;
-  --color-border: #294052;
+  --color-orange: #FF6602;
+  --color-white: #fff;
   --font-roboto: var(--roboto-font);
   --font-orbitron: var(--orbitron-font);
 }

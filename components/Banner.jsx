@@ -57,7 +57,7 @@ const Banner = () => {
     <section
       id="banner"
       onMouseMove={handleMouseMove}
-      className="relative isolate min-h-svh overflow-hidden bg-black px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
+      className="relative min-h-svh overflow-hidden bg-black/10 px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
     >
       {/* Background Image */}
       <div
@@ -78,7 +78,7 @@ const Banner = () => {
       />
 
       {/* Navbar */}
-      <div className="fixed top-6 left-1/2 z-50 w-full -translate-x-1/2 px-5 md:top-10 md:px-16">
+      <div className="fixed top-6 left-1/2 z-90 w-full -translate-x-1/2 px-5 md:top-10 md:px-16">
         <div className="grid grid-cols-12 items-center">
           {/* Logo */}
           <div className="col-span-6 md:col-span-4">
@@ -154,7 +154,7 @@ const Banner = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
           <div className="md:col-span-8">
-            <h1 className="mt-40 text-[clamp(3.5rem,15vw,6rem)] text-[#FF6602] font-semibold uppercase leading-[0.95] sm:text-7xl md:text-8xl lg:mt-0 lg:text-9xl">
+            <h1 className="mt-40 text-[clamp(3.5rem,15vw,6rem)] text-orange font-semibold uppercase leading-[0.95] sm:text-7xl md:text-8xl lg:mt-0 lg:text-9xl">
               Foyjur
               <br />
               <span className="text-transparent [-webkit-text-stroke:1px_white]">
@@ -162,8 +162,13 @@ const Banner = () => {
               </span>
             </h1>
 
-            <p className="mt-6 text-xs tracking-widest sm:text-sm md:text-base lg:text-lg">
+            <span className="mt-6 text-xs tracking-widest sm:text-sm md:text-base lg:text-lg">
               &bull; Building Scalable Web Applications
+            </span>
+            <p>
+              Crafting high-performance web applications with Laravel, PHP, and
+              modern JavaScript frameworks. Turning complex problems into
+              elegant solutions.
             </p>
           </div>
         </div>
