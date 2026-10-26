@@ -25,16 +25,16 @@ const NavMid = () => {
       id: "about",
     },
     {
-      icon: <SlChart />,
-      title: "Skills",
-      url: "#skills",
-      id: "skills",
-    },
-    {
       icon: <LuFolderCode />,
       title: "Projects",
       url: "#projects",
       id: "projects",
+    },
+    {
+      icon: <SlChart />,
+      title: "Skills",
+      url: "#skills",
+      id: "skills",
     },
     {
       icon: <FaRegComment />,

@@ -61,21 +61,13 @@ const testimonials = [
 ];
 
 const Banner = () => {
-  const [mouse, setMouse] = useState({ x: -200, y: -200 });
   const [showSocials, setShowSocials] = useState(false);
   const [anime, setAnime] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const currentTestimonial = testimonials[currentIndex];
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-
-    setMouse({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+  
 
   const socialLinks = [
     {
@@ -139,7 +131,6 @@ const Banner = () => {
   return (
     <section
       id="banner"
-      onMouseMove={handleMouseMove}
       className="relative min-h-svh overflow-hidden bg-black/10 px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
     >
       {/* Testimonial Card */}
@@ -179,15 +170,6 @@ const Banner = () => {
 
       {/* Dark Overlay */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/50" />
-
-      {/* Mouse Following Spotlight */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 hidden transition-[background] duration-100 sm:block"
-        style={{
-          background: `radial-gradient(circle 220px at ${mouse.x}px ${mouse.y}px, rgba(255,255,255,0.12), transparent 80%)`,
-        }}
-      />
 
       {/* Navbar */}
       <div className="fixed left-1/2 top-6 z-90 w-full -translate-x-1/2 px-5 md:top-10 md:px-16">

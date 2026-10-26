@@ -1,4 +1,5 @@
 import React from "react";
+import SecTitle from "@/components/SecTitle";
 
 const About = () => {
   return (
@@ -6,16 +7,8 @@ const About = () => {
       id="about"
       className="relative z-10 min-h-screen bg-black/80 px-4 py-16 text-secondary sm:px-6 sm:py-20 md:px-10 md:py-24 lg:py-28"
     >
-      <div className="container mx-auto">
-        {/* Section Title */}
-        <h2 className="relative mb-12 w-fit text-base font-normal uppercase tracking-[5px] text-orange after:absolute after:-bottom-4 after:left-0 after:h-1 after:w-14 after:bg-white sm:mb-16 sm:text-xl sm:tracking-[8px] md:mb-20 md:text-2xl md:tracking-[10px]">
-          About Me
-        </h2>
-
-        {/* Main Heading */}
-        <h1 className="mb-8 text-3xl font-semibold uppercase leading-tight text-orange sm:mb-10 sm:text-4xl md:mb-12 md:text-5xl lg:text-6xl xl:text-7xl">
-          Behind the <span className="text-white">Interface</span>
-        </h1>
+      <div className="container">
+        <SecTitle head2={"about me"} head1={"behind the "} headspan={"interface"} />
 
         {/* About Content */}
         <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 md:grid-cols-2 md:gap-8 lg:gap-16">

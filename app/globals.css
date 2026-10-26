@@ -16,5 +16,9 @@ body {
 }
 
 .container {
-  @apply max-w-7xl px-4;
+  @apply max-w-7xl px-4 mx-auto;
+}
+
+.quicklinks {
+  @apply bg-black text-white text-4xl p-2 rounded-xl border border-black hover:bg-white hover:text-black duration-150 ease-in-out;
 }
