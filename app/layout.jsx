@@ -1,7 +1,10 @@
-import { Roboto } from "next/font/google";
+import { Roboto, Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const roboto = Roboto ({
   variable: "--font-roboto",
@@ -18,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={roboto.className}
+      className={cn(roboto.className, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
         <Navbar />

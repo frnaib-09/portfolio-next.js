@@ -1,10 +1,42 @@
 import React from 'react'
 import SecTitle from '@/components/SecTitle';
-import { RiShareBoxFill } from "react-icons/ri";
-import { FaGithub } from "react-icons/fa6";
+import AccordionGallery from "./AccordionGallery";
+
 
 
 const Projects = () => {
+  const items = [
+    {
+      image: "/images/ecobazar.png",
+      label: "Ecobazar",
+      link: "https://frnaib-09.github.io/Eco-bazar/",
+      target: "_blank",
+    },
+    {
+      image: "/images/furniro.jpg",
+      label: "Furniro",
+      link: "https://furniro-jet-ten.vercel.app",
+      target: "_blank",
+    },
+    {
+      image: "/images/doc.png",
+      label: "Dr. Elena Gomez",
+      link: "https://doctor-portfolio-alpha-blue.vercel.app/",
+      target: "_blank",
+    },
+    {
+      image: "/images/gapushgupush.png",
+      label: "Gapush Gupush",
+      link: "https://frnaib-09.github.io/GAPUSH_GUPUSH/",
+      target: "_blank",
+    },
+    {
+      image: "/images/ashikur.png",
+      label: "UI|UX Designer Portfolio",
+      link: "https://frnaib-09.github.io/Ashikur-Rahman/",
+      target: "_blank",
+    },
+  ];
   return (
     <section
       id="projects"
@@ -17,34 +49,25 @@ const Projects = () => {
           headspan={"worked on!"}
         />
         <div className="projectCards">
-          <div className="grid grid-cols-12 gap-5 items-center justify-between">
-            <div className="col-span-12 md:col-span-6 relative group">
-              <img
-                src="/images/ecobazar.png"
-                alt=""
-                className="rounded-4xl hover:brightness-70 duration-150 ease"
-              />
-              <div className="links absolute top-4 right-4 flex gap-4 opacity-0 -translate-x-40 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
-                <a href="https://github.com/frnaib-09/Eco-bazar.git">
-                  <FaGithub className="quicklinks" />
-                </a>
-                <a href="https://frnaib-09.github.io/Eco-bazar/">
-                  <RiShareBoxFill className="quicklinks delay-75" />
-                </a>
-              </div>
-            </div>
-            <div className="col-span-12 md:col-span-6">
-              <p className="flex flex-col gap-4 text-justify text-sm leading-7 text-white sm:text-base sm:leading-8">
-                EcoBazar is a full-stack e-commerce platform designed to provide
-                a seamless online shopping experience. It includes product and
-                category management, user authentication, shopping cart
-                functionality, order management, and customer and admin
-                dashboards. Built with Laravel, the project focuses on
-                structured backend development, database management, and
-                responsive user interfaces.
-              </p>
-            </div>
-          </div>
+          <AccordionGallery
+            items={items}
+            defaultIndex={2}
+            expandRatio={0.52}
+            trigger="hover"
+            accentColor="#ffffff"
+            overlayColor="#060010"
+            textColor="#ffffff"
+            showLabels
+            duration={0.6}
+            ease="power3.out"
+            parallax={0.5}
+            tilt={8}
+            stagger={0.06}
+            height={460}
+            gap={10}
+            radius={16}
+            orientation="horizontal"
+          />
         </div>
       </div>
     </section>
