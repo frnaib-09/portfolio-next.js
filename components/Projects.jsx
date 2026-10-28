@@ -8,25 +8,25 @@ const Projects = () => {
   const items = [
     {
       image: "/images/ecobazar.png",
-      label: "Ecobazar",
+      label: "E-commerce Website",
       link: "https://frnaib-09.github.io/Eco-bazar/",
       target: "_blank",
     },
     {
       image: "/images/furniro.jpg",
-      label: "Furniro",
+      label: "E-commerce Website",
       link: "https://furniro-jet-ten.vercel.app",
       target: "_blank",
     },
     {
       image: "/images/doc.png",
-      label: "Dr. Elena Gomez",
+      label: "Doctor Portfolio Website ",
       link: "https://doctor-portfolio-alpha-blue.vercel.app/",
       target: "_blank",
     },
     {
       image: "/images/gapushgupush.png",
-      label: "Gapush Gupush",
+      label: "Restaurent Website",
       link: "https://frnaib-09.github.io/GAPUSH_GUPUSH/",
       target: "_blank",
     },
