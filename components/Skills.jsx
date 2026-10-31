@@ -116,7 +116,7 @@ const skillLogos = skillGroups.flatMap(({ skills }) =>
 const Skills = () => (
   <section id="skills" className="basics">
     <div className="container">
-      <SecTitle head2="Skills" head1="The Stack " headspan="I Use" />
+      <SecTitle head2="expertise" head1="The Stack " headspan="I Use" />
 
       <div className="mb-10 rounded-2xl py-4 sm:mb-12">
         <LogoLoop
