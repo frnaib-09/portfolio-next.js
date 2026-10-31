@@ -1,14 +1,18 @@
+'use client';
+
 import React from "react";
+import ProfileCard from '@/components/ProfileCard';
 import SecTitle from "@/components/SecTitle";
 
 const About = () => {
   return (
-    <section
-      id="about"
-      className="relative z-10 min-h-screen bg-black/80 px-4 py-16 text-secondary sm:px-6 sm:py-20 md:px-10 md:py-24 lg:py-28"
-    >
+    <section id="about" className="basics">
       <div className="container">
-        <SecTitle head2={"about me"} head1={"behind the "} headspan={"interface"} />
+        <SecTitle
+          head2={"about me"}
+          head1={"behind the "}
+          headspan={"interface"}
+        />
 
         {/* About Content */}
         <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 md:grid-cols-2 md:gap-8 lg:gap-16">
@@ -33,17 +37,28 @@ const About = () => {
           </div>
 
           {/* About Image */}
-          <div className="mx-auto mt-2 w-full max-w-md min-w-0 md:mt-0 md:max-w-none">
-            <img
-              src="/images/about.jpg"
-              alt="Developer workspace and creative process"
-              className="h-auto w-full rounded-sm object-cover"
-              loading="lazy"
-            />
 
-            <p className="mt-4 text-xs font-normal italic uppercase tracking-[2px] text-gray-400 sm:mt-5 sm:text-sm sm:tracking-[4px]">
-              Less noise, more build ups.
-            </p>
+          <div style={{ width: "100%", height: "600px", justifyContent: "center", alignItems: "center", display: "flex" }}>
+            <ProfileCard
+              name="Foyjur Rafee"
+              title="Full Stack Developer"
+              handle="code_with_foyjur"
+              status="Online"
+              contactText="Contact"
+              avatarUrl="/images/foyjur.png"
+              iconUrl="/assets/demo/iconpattern.png"
+              holo={0.8}
+              glare={0.5}
+              tiltStrength={12}
+              parallax={8}
+              radius={16}
+              enableTilt
+              intro
+              showUserInfo
+              enableMobileTilt={false}
+              theme="dark"
+              onContactClick={() => console.log("Contact clicked")}
+            />
           </div>
         </div>
 

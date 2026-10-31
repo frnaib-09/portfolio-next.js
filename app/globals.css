@@ -27,6 +27,10 @@ body {
   @apply bg-black text-white text-4xl p-2 rounded-xl border border-black hover:bg-white hover:text-black duration-150 ease-in-out;
 }
 
+.basics {
+  @apply relative z-10 min-h-screen bg-black/80 px-4 py-16 text-secondary sm:px-6 sm:py-20 md:px-10 md:py-24 lg:py-28;
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

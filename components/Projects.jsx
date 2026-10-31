@@ -40,13 +40,13 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative z-10 min-h-screen bg-black/80 px-4 py-16 text-secondary sm:px-6 sm:py-20 md:px-10 md:py-24 lg:py-28"
+      className="basics"
     >
       <div className="container">
         <SecTitle
           head2={"contributions"}
           head1={"Projects I've "}
-          headspan={"worked on!"}
+          headspan={"worked on"}
         />
         <div className="projectCards">
           <AccordionGallery
