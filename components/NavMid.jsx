@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { GoHome } from "react-icons/go";
-import { FaIdCard, FaRegComment } from "react-icons/fa";
+import { FaIdCard, FaDollarSign } from "react-icons/fa";
 import { SlChart } from "react-icons/sl";
 import { LuFolderCode } from "react-icons/lu";
 import { FaRegHandshake } from "react-icons/fa6";
+import { PiSuitcaseSimple } from "react-icons/pi";
 
 const NavMid = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -37,10 +38,16 @@ const NavMid = () => {
       id: "skills",
     },
     {
-      icon: <FaRegComment />,
-      title: "Testimonials",
-      url: "#testimonials",
-      id: "testimonials",
+      icon: <FaDollarSign />,
+      title: "Pricing",
+      url: "#pricing",
+      id: "pricing",
+    },
+    {
+      icon: <PiSuitcaseSimple />,
+      title: "Career",
+      url: "#career",
+      id: "career",
     },
     {
       icon: <FaRegHandshake />,

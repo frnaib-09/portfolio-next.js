@@ -5,6 +5,8 @@ import About from "@/components/About";
 import MouseSpotlight from "@/components/MouseSpotlight"; 
 import Projects from "@/components/Projects"
 import Skills from "@/components/Skills"
+import Pricing from "@/components/Pricing";
+import Career from "@/components/Career";
 
 export default function Home() {
   
@@ -15,6 +17,8 @@ export default function Home() {
       <About />
       <Projects />
       <Skills />
+      <Pricing />
+      <Career />
     </div>
   );
 }
