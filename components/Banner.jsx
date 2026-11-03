@@ -172,7 +172,7 @@ const Banner = () => {
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/50" />
 
       {/* Navbar */}
-      <div className="fixed left-1/2 top-6 z-90 w-full -translate-x-1/2 px-5 md:top-10 md:px-16">
+      <header className="fixed left-1/2 top-6 z-90 w-full -translate-x-1/2 px-5 md:top-10 md:px-16">
         <div
           className={`grid grid-cols-12 items-center rounded-2xl px-2 py-2 transition-all duration-700 ease-in-out ${
             anime
@@ -245,7 +245,7 @@ const Banner = () => {
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Introduction */}
       <div className="container mx-auto">

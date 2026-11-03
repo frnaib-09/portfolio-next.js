@@ -95,7 +95,7 @@ const NavMid = () => {
   }, []);
 
   return (
-    <div>
+    <nav>
       <ul className="flex flex-row items-center justify-center gap-0.5 sm:gap-2 lg:flex-col lg:gap-8">
         {navItems.map((item) => {
           const isActive = activeSection === item.id;
@@ -123,7 +123,7 @@ const NavMid = () => {
           );
         })}
       </ul>
-    </div>
+    </nav>
   );
 };
 
