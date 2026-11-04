@@ -7,6 +7,8 @@ import Projects from "@/components/Projects"
 import Skills from "@/components/Skills"
 import Pricing from "@/components/Pricing";
 import Career from "@/components/Career";
+import Contact from "@/components/Contact";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   
@@ -16,9 +18,10 @@ export default function Home() {
       <MouseSpotlight />
       <About />
       <Projects />
-      <Skills />
-      <Pricing />
-      <Career />
+      <ScrollReveal><Skills /></ScrollReveal>
+      <ScrollReveal><Pricing /></ScrollReveal>
+      <ScrollReveal><Career /></ScrollReveal>
+      <ScrollReveal><Contact /></ScrollReveal>
     </div>
   );
 }

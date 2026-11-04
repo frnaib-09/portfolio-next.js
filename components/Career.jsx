@@ -22,7 +22,7 @@ const Career = () => {
     {
       id: "02",
       company: "Creative IT Institute",
-      role: "Web Development Intern",
+      role: "Jr. Web Developer",
       duration: "2025",
       type: "Internship",
       description:
@@ -32,7 +32,7 @@ const Career = () => {
     },
     {
       id: "03",
-      company: "Independent Development",
+      company: "Fiverr & Upwork Freelance Projects",
       role: "Freelance Web Developer",
       duration: "2024 — Present",
       type: "Independent Work",
@@ -43,9 +43,9 @@ const Career = () => {
     },
     {
       id: "04",
-      company: "Personal Development Projects",
+      company: "LogicVeda Technologies",
       role: "Full Stack Developer",
-      duration: "Ongoing",
+      duration: "4 months",
       type: "Project Experience",
       description:
         "Building practical projects to explore modern web technologies, improve problem-solving abilities, and develop production-oriented development workflows.",
@@ -55,7 +55,7 @@ const Career = () => {
   ];
 
   return (
-    <section id="career" className="basics">
+    <section id="career" className="basics bg-black/90">
       <div className="container mx-auto px-4">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">

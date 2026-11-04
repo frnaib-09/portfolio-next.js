@@ -40,7 +40,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="basics"
+      className="basics bg-black/60"
     >
       <div className="container">
         <SecTitle

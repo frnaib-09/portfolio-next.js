@@ -131,7 +131,7 @@ const Banner = () => {
   return (
     <section
       id="banner"
-      className="relative min-h-svh overflow-hidden bg-black/10 px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
+      className="relative min-h-svh overflow-hidden bg-black/20 px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
     >
       {/* Testimonial Card */}
       <div
@@ -169,7 +169,7 @@ const Banner = () => {
       />
 
       {/* Dark Overlay */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/50" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/20" />
 
       {/* Navbar */}
       <header className="fixed left-1/2 top-6 z-90 w-full -translate-x-1/2 px-5 md:top-10 md:px-16">

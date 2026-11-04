@@ -6,7 +6,7 @@ import SecTitle from "@/components/SecTitle";
 
 const About = () => {
   return (
-    <section id="about" className="basics">
+    <section id="about" className="basics bg-black/50">
       <div className="container">
         <SecTitle
           head2={"about me"}
@@ -38,7 +38,15 @@ const About = () => {
 
           {/* About Image */}
 
-          <div style={{ width: "100%", height: "600px", justifyContent: "center", alignItems: "center", display: "flex" }}>
+          <div
+            style={{
+              width: "100%",
+              height: "600px",
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
             <ProfileCard
               name="Foyjur Rafee"
               title="Full Stack Developer"

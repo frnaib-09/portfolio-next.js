@@ -6,7 +6,7 @@ import { RxArrowTopRight } from "react-icons/rx";
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="basics py-16 sm:py-20 lg:py-24">
+    <section id="pricing" className="basics bg-black/80">
       <div className="container mx-auto px-4">
         <SecTitle
           head2="pricing"
@@ -14,11 +14,11 @@ const Pricing = () => {
           headspan=" I Charge"
         />
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-4">
           <PriceCard />
         </div>
 
-        <div className="custom card group relative mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-300 hover:border-orange/30 sm:p-8 lg:p-10">
+        <div className="custom card group relative mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/3 p-6 transition-colors duration-300 hover:border-orange/30 sm:p-8 lg:p-10">
           {/* Decorative glow */}
 
           <div className="relative z-10">
@@ -27,7 +27,7 @@ const Pricing = () => {
             </span>
 
             <h3 className="mb-3 text-xl font-semibold leading-snug text-white sm:text-2xl lg:text-3xl">
-              Have a Unique Project?
+              Have an Unique Project?
             </h3>
 
             <h4 className="mb-4 text-base font-medium text-orange sm:text-lg">

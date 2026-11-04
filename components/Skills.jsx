@@ -114,7 +114,7 @@ const skillLogos = skillGroups.flatMap(({ skills }) =>
 );
 
 const Skills = () => (
-  <section id="skills" className="basics">
+  <section id="skills" className="basics bg-black/70">
     <div className="container">
       <SecTitle head2="expertise" head1="The Stack " headspan="I Use" />
 

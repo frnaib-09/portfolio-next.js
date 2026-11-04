@@ -1,8 +1,8 @@
 import { Roboto, Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
+import Preloader from "@/components/Preloader";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -24,11 +24,9 @@ export default function RootLayout({ children }) {
       className={cn(roboto.className, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
+        <Preloader />
         <Navbar />
-
         {children}
-
-        {/* <Footer /> */}
       </body>
     </html>
   );
