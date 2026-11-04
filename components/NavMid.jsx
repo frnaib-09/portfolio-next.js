@@ -13,13 +13,6 @@ const NavMid = () => {
 
   const navItems = [
     {
-      icon: <GoHome />,
-      title: "Home",
-      url: "#banner",
-      // Keep the observed section id in sync with the banner anchor.
-      id: "banner",
-    },
-    {
       icon: <FaIdCard />,
       title: "About",
       url: "#about",
