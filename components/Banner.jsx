@@ -136,7 +136,7 @@ const Banner = () => {
       {/* Testimonial Card */}
       <div
         key={currentIndex}
-        className="comments absolute right-56 top-80 hidden h-auto w-90 rounded-2xl  p-6 shadow-xl backdrop-blur-md md:block"
+        className="comments absolute right-56 top-80 hidden h-auto w-90 rounded-2xl p-6 shadow-xl backdrop-blur-md md:right-8 md:w-72 md:p-4 md:block lg:right-56 lg:w-90 lg:p-6"
       >
         <FaQuoteLeft className="mb-4 text-orange/50 text-3xl" />
 
@@ -251,7 +251,7 @@ const Banner = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
           <div className="md:col-span-8">
-            <h1 className="mt-40 text-[clamp(3.5rem,15vw,6rem)] font-semibold uppercase leading-[0.95] text-orange sm:text-7xl md:text-8xl lg:mt-0 lg:text-9xl">
+            <h1 className="mt-40 text-[clamp(3.5rem,15vw,6rem)] font-semibold uppercase leading-[0.95] text-orange sm:text-7xl md:text-7xl lg:mt-0 lg:text-9xl">
               Foyjur
               <br />
               <span className="text-transparent [-webkit-text-stroke:1px_white]">
