@@ -9,11 +9,14 @@ const Preloader = () => {
   useEffect(() => {
     const exitTimer = setTimeout(() => {
       setExiting(true);
+      // Let the hero start its intro while the curtain lifts.
+      window.__preloaderDone = true;
+      window.dispatchEvent(new Event("preloader:done"));
     }, 2600);
 
     const hideTimer = setTimeout(() => {
       setHidden(true);
-    }, 3100);
+    }, 3500);
 
     return () => {
       clearTimeout(exitTimer);

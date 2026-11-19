@@ -56,7 +56,7 @@ const Career = () => {
 
   return (
     <section id="career" className="basics bg-black/90">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
 
@@ -64,19 +64,21 @@ const Career = () => {
           <div className="md:sticky md:top-28 md:self-start">
 
             <SecTitle
+              compact
+              index="05"
               head2="Career"
               head1="My professional "
               headspan="journey"
             />
 
-            <p className="mt-7 max-w-md text-sm leading-7 text-white/50">
+            <p data-reveal="up" className="max-w-md text-sm leading-7 text-white/60">
               Every experience has been a step forward.
               Here's a look at my journey through web
               development, entrepreneurship, and building
               digital experiences.
             </p>
 
-            <div className="mt-10 flex items-center gap-4">
+            <div data-reveal="up" className="mt-10 flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-orange/20 bg-orange/10 text-orange">
                 <HiOutlineBriefcase size={23} />
               </div>
@@ -92,44 +94,73 @@ const Career = () => {
             </div>
 
             <div className="mt-12 hidden md:block">
-              <span className="text-xs uppercase tracking-[0.25em] text-white/30">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-white/40">
                 Scroll to explore
               </span>
-              <div className="mt-3 h-[1px] w-24 bg-orange/50" />
+              <div className="scroll-hint-line mt-3 h-px w-24 bg-orange/30" />
             </div>
 
           </div>
 
           {/* Right Experience Timeline */}
-          <div className="relative">
+          <div className="relative" data-timeline>
 
-            <div className="absolute left-[19px] top-5 bottom-10 w-px bg-white/10" />
+            {/* Base rail */}
+            <div data-timeline-rail className="absolute left-[19px] top-5 bottom-10 w-px bg-white/10" aria-hidden="true" />
+
+            {/* Lit track between first and last dot (sized by MotionDirector) */}
+            <div data-timeline-track className="absolute left-[19px] top-3 w-px" aria-hidden="true">
+              <div
+                data-timeline-fill
+                className="absolute inset-0 origin-top bg-linear-to-b from-orange/40 to-orange shadow-[0_0_14px_rgba(255,102,2,0.7)]"
+              />
+            </div>
+
+            {/* The travelling light */}
+            <div
+              data-timeline-orb
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[20px] top-0 z-10 -translate-x-1/2"
+            >
+              <span className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange/25 blur-xl" />
+              <span className="absolute inset-0 animate-ping rounded-full bg-orange/50" />
+              <span className="relative block h-6 w-6 rounded-full border-2 border-white/80 bg-orange shadow-[0_0_0_6px_rgba(255,102,2,0.2),0_0_28px_6px_rgba(255,102,2,0.65)]" />
+            </div>
 
             <div className="space-y-0">
               {experiences.map((item, index) => (
                 <article
                   key={item.id}
-                  className="group relative pb-14 pl-16"
+                  data-timeline-item
+                  className={`group relative isolate pb-14 pl-16 ${item.current ? "is-active" : ""}`}
                 >
+                  {/* Oversized index */}
+                  <span
+                    aria-hidden="true"
+                    className="timeline-index pointer-events-none absolute -z-10 -top-6 right-0 select-none font-display text-7xl font-extrabold leading-none text-white/[0.04] sm:text-8xl"
+                  >
+                    {item.id}
+                  </span>
+
 
                   {/* Timeline Dot */}
                   <div
-                    className={`absolute left-[12px] top-1 flex h-4 w-4 items-center justify-center rounded-full border-2 transition-all duration-300 ${
-                      item.current
-                        ? "border-orange bg-orange shadow-[0_0_15px_rgba(255,102,2,0.4)]"
-                        : "border-white/20 bg-[#111]"
-                    }`}
+                    aria-hidden="true"
+                    className="timeline-dot absolute left-[12px] top-1 h-4 w-4 rounded-full border-2 border-white/20 bg-[#111]"
                   />
 
                   {/* Experience Number */}
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="text-xs font-medium tracking-[0.2em] text-orange">
+                    <span className="font-mono text-[11px] tracking-[0.2em] text-orange">
                       EXPERIENCE / {item.id}
                     </span>
 
                     {item.current && (
                       <span className="flex items-center gap-2 text-xs text-orange">
-                        <span className="h-1.5 w-1.5 rounded-full bg-orange" />
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange opacity-70" />
+                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange" />
+                        </span>
                         Currently Working
                       </span>
                     )}
@@ -137,7 +168,7 @@ const Career = () => {
 
                   {/* Company */}
                   <div className="mb-3">
-                    <h3 className="text-2xl sm:text-3xl font-semibold text-white transition-colors duration-300 group-hover:text-orange">
+                    <h3 className="font-display text-2xl font-bold tracking-tight text-white transition-colors duration-500 group-hover:text-orange sm:text-3xl">
                       {item.company}
                     </h3>
 
@@ -163,7 +194,7 @@ const Career = () => {
                     {item.tech.map((technology) => (
                       <span
                         key={technology}
-                        className="border border-white/10 px-3 py-1.5 text-xs text-white/50 transition-all duration-300 group-hover:border-orange/30 group-hover:text-white/80"
+                        className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[11px] text-white/55 transition-all duration-500 group-hover:border-orange/30 group-hover:text-white/85"
                       >
                         {technology}
                       </span>
@@ -171,7 +202,9 @@ const Career = () => {
                   </div>
 
                   {/* Bottom Divider */}
-                  <div className="mt-10 h-px w-full bg-white/10 transition-colors duration-300 group-hover:bg-orange/30" />
+                  <div className="relative mt-10 h-px w-full overflow-hidden bg-white/10" aria-hidden="true">
+                    <div className="absolute inset-0 origin-left scale-x-0 bg-orange/60 transition-transform duration-700 ease-expo group-hover:scale-x-100" />
+                  </div>
 
                 </article>
               ))}

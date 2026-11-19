@@ -1,19 +1,33 @@
-import React from 'react'
+import React from "react";
 
-const SecTitle = ({head2, head1, headspan}) => {
+/**
+ * Section heading: mono index + label with a self-drawing rule,
+ * then a display headline revealed line by line (see MotionDirector).
+ */
+const SecTitle = ({ head2, head1, headspan, index, compact = false }) => {
   return (
-    <div>
-      {/* Section Title */}
-      <h2 className="relative mb-12 w-fit text-base font-normal uppercase tracking-[5px] text-orange after:absolute after:-bottom-4 after:left-0 after:h-0.5 after:rounded-[50%] after:w-14 after:bg-white sm:mb-16 sm:text-xl sm:tracking-[8px] md:mb-20 md:text-2xl md:tracking-[10px]">
-        {head2}
-      </h2>
+    <div className="mb-10 sm:mb-14 md:mb-16">
+      <div className="mb-8 flex items-center gap-4 font-mono text-xs uppercase tracking-[0.3em] text-orange sm:mb-10 sm:text-sm">
+        {index && <span className="text-white/40">({index})</span>}
+        <span>{head2}</span>
+        <span
+          data-reveal="line"
+          aria-hidden="true"
+          className="h-px max-w-40 flex-1 bg-linear-to-r from-orange/70 to-transparent"
+        />
+      </div>
 
-      {/* Main Heading */}
-      <h1 className="mb-8 text-3xl font-semibold uppercase leading-tight text-orange sm:mb-10 sm:text-4xl md:mb-12 md:text-5xl lg:text-6xl xl:text-7xl">
-        {head1}<span className="text-white">{headspan}</span>
-      </h1>
+      <h2
+        data-split
+        className={`font-display font-extrabold uppercase leading-[0.95] tracking-tight text-orange ${
+          compact ? "text-[clamp(1.5rem,2.9vw,2.85rem)]" : "text-[clamp(1.65rem,6.5vw,5.5rem)]"
+        }`}
+      >
+        {head1}
+        <span className="text-white">{headspan}</span>
+      </h2>
     </div>
   );
-}
+};
 
-export default SecTitle
+export default SecTitle;

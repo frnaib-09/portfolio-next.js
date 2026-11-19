@@ -1,16 +1,25 @@
-import { Roboto, Geist } from "next/font/google";
+import { Geist, Syne, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import Preloader from "@/components/Preloader";
+import Cursor from "@/components/motion/Cursor";
+import BackToTop from "@/components/BackToTop";
+import MotionDirector from "@/components/motion/MotionDirector";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
-const roboto = Roboto ({
-  variable: "--font-roboto",
+const syne = Syne({
   subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
 });
 
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
+});
 
 export const metadata = {
   title: "Foyjur Rafee - The Best Software Developer in the South Asia",
@@ -21,12 +30,17 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={cn(roboto.className, "font-sans", geist.variable)}
+      className={cn("font-sans", geist.variable, syne.variable, mono.variable)}
     >
       <body className="min-h-full flex flex-col">
+        <div id="scroll-progress" aria-hidden="true" />
+        <div className="grain" aria-hidden="true" />
         <Preloader />
         <Navbar />
         {children}
+        <BackToTop />
+        <Cursor />
+        <MotionDirector />
       </body>
     </html>
   );

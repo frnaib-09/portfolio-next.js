@@ -7,8 +7,7 @@
 @theme {
   --color-orange: #FF6602;
   --color-white: #fff;
-  --font-roboto: var(--roboto-font);
-  --font-orbitron: var(--orbitron-font);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -16,7 +15,9 @@ html {
 }
 
 body {
-  @apply mx-auto font-roboto;
+  @apply mx-auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -32,7 +33,9 @@ body {
 }
 
 @theme inline {
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-syne);
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
   --font-sans: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -156,7 +159,381 @@ body {
 }
 
 .card {
-  @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/4 p-6 transition-colors duration-200 hover:border-orange/50 hover:bg-white/[0.07] sm:p-7
+  @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/4 p-6 transition-[background-color,translate] duration-500 ease-expo hover:-translate-y-1.5 hover:bg-white/[0.07] sm:p-7;
+}
+
+/* ================================================================
+   Global atmosphere
+   ================================================================ */
+
+::selection {
+  background: var(--color-orange);
+  color: #000;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-orange) #000;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+/* Thin scroll progress line across the very top */
+#scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #ff6602, #ffb070);
+  box-shadow: 0 0 12px rgb(255 102 2 / 0.6);
+  pointer-events: none;
+}
+
+/* Animated film grain — transform-only animation, stays on the compositor */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1s steps(6) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-6%, 4%); }
+  40% { transform: translate(5%, -7%); }
+  60% { transform: translate(-3%, 9%); }
+  80% { transform: translate(8%, 2%); }
+}
+
+/* Outlined display text */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.85);
+}
+
+/* ================================================================
+   Cursor
+   ================================================================ */
+
+.cursor-layer {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor-layer {
+    display: block;
+  }
+}
+
+.cursor-glow,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.cursor-glow {
+  z-index: 997;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 102 2 / 0.09), transparent 60%);
+}
+
+.cursor-ring {
+  z-index: 1001;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(255 255 255 / 0.7);
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  transition:
+    width 0.45s var(--ease-expo),
+    height 0.45s var(--ease-expo),
+    background-color 0.3s,
+    border-color 0.3s,
+    scale 0.2s;
+}
+
+.cursor-ring[data-state="hover"] {
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  border-color: #fff;
+}
+
+.cursor-ring[data-state="label"] {
+  width: 96px;
+  height: 96px;
+  background: #fff;
+  border-color: #fff;
+}
+
+.cursor-ring.is-down {
+  scale: 0.85;
+}
+
+.cursor-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #000;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring[data-state="label"] .cursor-label {
+  opacity: 1;
+}
+
+/* ================================================================
+   Glow cards — a border of light that follows the pointer.
+   --mx / --my are set by MotionDirector.
+   ================================================================ */
+
+.glow-card {
+  isolation: isolate;
+}
+
+.glow-card::before,
+.glow-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+/* border light */
+.glow-card::before {
+  z-index: 2;
+  padding: 1px;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 102 2 / 0.85),
+    transparent 45%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+/* inner wash */
+.glow-card::after {
+  z-index: -1;
+  background: radial-gradient(
+    520px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 102 2 / 0.09),
+    transparent 45%
+  );
+}
+
+.glow-card:hover::before,
+.glow-card:hover::after {
+  opacity: 1;
+}
+
+/* Rotating conic border for the featured plan */
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.spin-border {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 1.5px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0 62%,
+    rgb(255 102 2 / 0.25) 72%,
+    #ff6602 86%,
+    #ffd1b0 90%,
+    transparent 94%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  animation: spin-angle 4.5s linear infinite;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* ================================================================
+   Career timeline states (toggled by MotionDirector)
+   ================================================================ */
+
+[data-timeline-item] .timeline-dot {
+  transition:
+    background-color 0.5s,
+    border-color 0.5s,
+    box-shadow 0.5s,
+    scale 0.5s var(--ease-expo);
+}
+
+[data-timeline-item].is-active .timeline-dot {
+  background: var(--color-orange);
+  border-color: var(--color-orange);
+  box-shadow: 0 0 0 6px rgb(255 102 2 / 0.15), 0 0 18px rgb(255 102 2 / 0.6);
+  scale: 1.15;
+}
+
+[data-timeline-item] .timeline-index {
+  transition: color 0.5s;
+}
+
+[data-timeline-item].is-active .timeline-index {
+  color: rgb(255 102 2 / 0.12);
+}
+
+/* Scroll hint in the hero */
+.scroll-hint-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-hint-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-orange);
+  animation: scroll-hint 2.2s var(--ease-expo) infinite;
+}
+
+@keyframes scroll-hint {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+/* ================================================================
+   Horizontal project gallery
+   Base: a native swipe carousel. With .is-hscroll (added by
+   MotionDirector on desktop) the stage pins and JS drives the track.
+   ================================================================ */
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+[data-hscroll].is-hscroll [data-hscroll-stage] {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  padding-block: 0;
+}
+
+[data-hscroll].is-hscroll [data-hscroll-viewport] {
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+/* ================================================================
+   Skills — brand-coloured chips
+   ================================================================ */
+
+.brand-chip {
+  transition:
+    translate 0.3s var(--ease-expo),
+    border-color 0.3s,
+    background-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.brand-chip:hover {
+  border-color: color-mix(in srgb, var(--c) 70%, transparent);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+  box-shadow: 0 0 22px -4px color-mix(in srgb, var(--c) 55%, transparent);
+}
+
+/* ================================================================
+   Pricing — shine sweep and animated mesh
+   ================================================================ */
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.55) 50%, transparent 70%);
+  translate: -120% 0;
+  animation: shine 3.5s var(--ease-expo) infinite;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0%, 55% { translate: -120% 0; }
+  100% { translate: 120% 0; }
+}
+
+.mesh-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: mesh-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-drift {
+  0% { translate: 0 0; scale: 1; }
+  50% { translate: 12% -18%; scale: 1.15; }
+  100% { translate: -10% 10%; scale: 0.9; }
+}
+
+/* Reduce motion everywhere */
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .spin-border,
+  .scroll-hint-line::after,
+  .shine::after,
+  .mesh-blob {
+    animation: none;
+  }
+
+  #scroll-progress {
+    display: none;
+  }
 }
 
 .preloader {
@@ -274,14 +651,29 @@ body {
 
 /* Exit */
 
+.preloader {
+  clip-path: inset(0 0 0 0);
+}
+
 .preloader-exit {
-  animation: loader-exit 0.5s ease forwards;
+  animation: loader-exit 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.preloader-exit .preloader-logo {
+  animation: loader-logo-exit 0.7s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 @keyframes loader-exit {
   to {
-    opacity: 0;
+    clip-path: inset(0 0 100% 0);
     visibility: hidden;
+  }
+}
+
+@keyframes loader-logo-exit {
+  to {
+    transform: translateY(-40px) scale(0.92);
+    opacity: 0;
   }
 }
 

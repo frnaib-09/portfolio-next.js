@@ -7,34 +7,55 @@ import { RxArrowTopRight } from "react-icons/rx";
 const Pricing = () => {
   return (
     <section id="pricing" className="basics bg-black/80">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <SecTitle
+          index="04"
           head2="pricing"
           head1="The honorarium"
           headspan=" I Charge"
         />
 
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-4">
+        <div data-reveal="stagger" className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <PriceCard />
         </div>
 
-        <div className="custom card group relative mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/3 p-6 transition-colors duration-300 hover:border-orange/30 sm:p-8 lg:p-10">
-          {/* Decorative glow */}
+        <div data-reveal="up" className="custom glow-card group relative mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/3 p-6 sm:p-8 lg:p-12">
+          {/* Animated colour mesh */}
+          <span aria-hidden="true" className="mesh-blob -left-20 -top-24 h-72 w-72 bg-orange/50" />
+          <span
+            aria-hidden="true"
+            className="mesh-blob -bottom-28 right-1/4 h-80 w-80 bg-[#ff2d55]/30"
+            style={{ animationDelay: "-5s" }}
+          />
+          <span
+            aria-hidden="true"
+            className="mesh-blob right-0 top-0 h-60 w-60 bg-[#ffb070]/25"
+            style={{ animationDelay: "-9s" }}
+          />
+
+          {/* Decorative oversized word */}
+          <span
+            aria-hidden="true"
+            data-parallax="0.25"
+            className="pointer-events-none absolute -right-6 top-1/2 hidden -translate-y-1/2 select-none font-display text-[11rem] font-extrabold uppercase leading-none text-outline opacity-10 lg:block"
+          >
+            Custom
+          </span>
 
           <div className="relative z-10">
-            <span className="mb-4 inline-block rounded-full border border-orange/20 bg-orange/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-orange">
+            <span className="mb-6 inline-block rounded-full border border-orange/20 bg-orange/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.25em] text-orange">
               Let's Collaborate
             </span>
 
-            <h3 className="mb-3 text-xl font-semibold leading-snug text-white sm:text-2xl lg:text-3xl">
-              Have an Unique Project?
+            <h3 className="mb-3 font-display text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl lg:text-5xl">
+              Have a Unique Project?
             </h3>
 
             <h4 className="mb-4 text-base font-medium text-orange sm:text-lg">
               Let's Build Something Great Together!
             </h4>
 
-            <p className="text-sm leading-7 text-white/60 sm:text-base">
+            <p className="max-w-2xl text-sm leading-7 text-white/60 sm:text-base">
               Have a specific idea or unique requirements? Let's discuss your
               vision, explore the possibilities, and find the right solution
               that fits your goals and budget.
@@ -59,11 +80,16 @@ const Pricing = () => {
             </div>
 
             <a
-              href="#contForm"
-              className="flex w-full items-center justify-center gap-3 rounded-xl bg-orange px-5 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:text-orange"
+              href="#contact"
+              data-magnetic="0.15"
+              className="group/btn relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-orange px-5 py-4 text-sm font-semibold text-black transition-colors duration-500 hover:text-orange sm:w-fit sm:px-10"
             >
-              Book an Appointment
-              <RxArrowTopRight className="text-xl transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 -z-0 translate-y-full rounded-full bg-white transition-transform duration-500 ease-expo group-hover/btn:translate-y-0"
+              />
+              <span className="relative">Book an Appointment</span>
+              <RxArrowTopRight className="relative text-xl transition-transform duration-500 ease-expo group-hover/btn:rotate-45" />
             </a>
           </div>
         </div>

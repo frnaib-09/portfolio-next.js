@@ -131,53 +131,26 @@ const Banner = () => {
   return (
     <section
       id="banner"
-      className="relative min-h-svh overflow-hidden bg-black/20 px-4 pb-28 pt-32 text-white sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48"
+      data-hero-scene
+      className="relative h-[220svh] overflow-clip text-white"
     >
-      {/* Testimonial Card */}
-      <div
-        key={currentIndex}
-        className="comments absolute right-56 top-80 hidden h-auto w-90 rounded-2xl p-6 shadow-xl backdrop-blur-md md:right-8 md:w-72 md:p-4 md:block lg:right-56 lg:w-90 lg:p-6"
-      >
-        <FaQuoteLeft className="mb-4 text-orange/50 text-3xl" />
-
-        <div className="min-h-24 text-sm leading-relaxed">
-          <Typewriter
-            key={`comment-${currentIndex}`}
-            options={{
-              strings: [currentTestimonial.cmnt],
-              autoStart: true,
-              loop: false,
-              delay: 40,
-              deleteSpeed: 25,
-            }}
-          />
-        </div>
-
-        <div className="mt-4 border-t border-white/20 pt-3">
-          <h6 className="font-semibold">{currentTestimonial.author}</h6>
-
-          <span className="text-sm opacity-70">
-            {currentTestimonial.location}
-          </span>
-        </div>
-      </div>
-
-      {/* Background Image */}
+      {/* Background Image (fixed, page-wide) */}
       <div
         aria-hidden="true"
-        className="fixed inset-0 -z-20 bg-[url('/images/foyjurbg.jpg')] bg-cover bg-center bg-no-repeat"
+        data-hero-bg
+        className="fixed inset-0 -z-20 bg-[url('/images/foyjurbg.jpg')] bg-cover bg-center bg-no-repeat will-change-transform"
       />
 
-      {/* Dark Overlay */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/20" />
-
       {/* Navbar */}
-      <header className="fixed left-1/2 top-6 z-90 w-full -translate-x-1/2 px-5 md:top-10 md:px-16">
+      <header
+        data-hero-fade
+        className="fixed left-1/2 top-6 z-90 w-full -translate-x-1/2 px-5 md:top-10 md:px-16"
+      >
         <div
-          className={`grid grid-cols-12 items-center rounded-2xl px-2 py-2 transition-all duration-700 ease-in-out ${
+          className={`grid grid-cols-12 items-center rounded-2xl border px-2 py-2 transition-all duration-700 ease-expo ${
             anime
-              ? "bg-black/20 backdrop-blur-xl"
-              : "bg-transparent backdrop-blur-none"
+              ? "border-white/10 bg-black/40 px-4 backdrop-blur-xl shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)]"
+              : "border-transparent bg-transparent backdrop-blur-none"
           }`}
         >
           {/* Logo */}
@@ -186,7 +159,9 @@ const Banner = () => {
               <img
                 src="/images/logo.png"
                 alt="Logo"
-                className="h-12 w-auto md:h-16"
+                className={`w-auto transition-all duration-700 ease-expo ${
+                  anime ? "h-10 md:h-12" : "h-12 md:h-16"
+                }`}
               />
             </a>
           </div>
@@ -237,7 +212,8 @@ const Banner = () => {
                   rel="noopener noreferrer"
                   aria-label={item.name}
                   title={item.name}
-                  className="text-2xl text-white transition-all duration-300 hover:-translate-y-1 hover:text-orange md:text-3xl"
+                  data-magnetic="0.5"
+                  className="text-2xl text-white transition-colors duration-300 hover:text-orange md:text-2xl lg:text-3xl"
                 >
                   {item.icon}
                 </a>
@@ -247,41 +223,142 @@ const Banner = () => {
         </div>
       </header>
 
-      {/* Introduction */}
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-          <div className="md:col-span-8">
-            <h1 className="mt-40 text-[clamp(3.5rem,15vw,6rem)] font-semibold uppercase leading-[0.95] text-orange sm:text-7xl md:text-7xl lg:mt-0 lg:text-9xl">
-              Foyjur
-              <br />
-              <span className="text-transparent [-webkit-text-stroke:1px_white]">
-                Rafee
-              </span>
-            </h1>
+      {/* Sticky stage: the opening scene plays while this stays pinned */}
+      <div className="sticky top-0 h-svh overflow-hidden bg-black/20 px-4 pb-28 pt-32 sm:px-6 sm:pb-32 sm:pt-36 md:px-10 md:pt-48">
+        {/* Dark Overlay + vignette */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,transparent_0%,rgba(0,0,0,0.55)_75%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-48 bg-linear-to-b from-transparent to-black/50"
+        />
+        {/* Dims in as the scene scrolls */}
+        <div aria-hidden="true" data-hero-dim className="absolute inset-0 bg-black opacity-0" />
 
-            <span className="mt-6 text-xs tracking-widest sm:text-sm md:text-base lg:text-lg">
-              &bull; Building Scalable Web Applications
-            </span>
+        {/* Testimonial Card */}
+        <div
+          data-hero-out="right"
+          className="absolute right-56 top-80 z-10 hidden w-90 md:right-8 md:block md:w-72 lg:right-56 lg:w-90"
+        >
+          <div data-hero-fade>
+            <div
+              key={currentIndex}
+              className="glow-card relative h-auto rounded-2xl border border-white/10 bg-black/35 p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl md:p-4 lg:p-6"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <FaQuoteLeft className="text-3xl text-orange/60" />
+                <span className="font-mono text-[10px] tracking-[0.25em] text-white/40">
+                  {String(currentIndex + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
+                </span>
+              </div>
+
+              <div className="min-h-24 text-sm leading-relaxed">
+                <Typewriter
+                  key={`comment-${currentIndex}`}
+                  options={{
+                    strings: [currentTestimonial.cmnt],
+                    autoStart: true,
+                    loop: false,
+                    delay: 40,
+                    deleteSpeed: 25,
+                  }}
+                />
+              </div>
+
+              <div className="mt-4 border-t border-white/15 pt-3">
+                <h6 className="font-semibold">{currentTestimonial.author}</h6>
+                <span className="text-sm opacity-70">{currentTestimonial.location}</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Typewriter */}
-      <div className="absolute bottom-24 left-0 w-full px-4 text-center text-xl font-bold uppercase sm:bottom-16 sm:text-3xl md:text-5xl">
-        <Typewriter
-          options={{
-            strings: [
-              "Full Stack Developer",
-              "Laravel Developer",
-              "Problem Solver",
-              "Innovative Thinker",
-            ],
-            autoStart: true,
-            loop: true,
-            delay: 60,
-            deleteSpeed: 35,
-          }}
-        />
+        {/* Introduction */}
+        <div className="container relative mx-auto">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
+            <div className="md:col-span-8">
+              <div data-hero-out="up" className="mt-36 mb-6 lg:mt-0">
+                <p
+                  data-hero-fade
+                  className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-black/30 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white/80 backdrop-blur-md sm:text-xs"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange opacity-70" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-orange" />
+                  </span>
+                  Available for projects &mdash; Dhaka, BD
+                </p>
+              </div>
+
+              <h1
+                data-hero-title
+                aria-label="Foyjur Rafee"
+                className="whitespace-nowrap font-display text-[clamp(3rem,14vw,8.5rem)] font-extrabold uppercase leading-[0.9] tracking-tight text-orange"
+              >
+                <span className="block" data-hero-line="left">Foyjur</span>
+                <span className="block text-outline" data-hero-line="right">Rafee</span>
+              </h1>
+
+              <div data-hero-out="up" className="mt-8">
+                <p
+                  data-hero-fade
+                  className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.3em] text-white/80 sm:text-sm"
+                >
+                  <span className="h-px w-12 bg-orange" aria-hidden="true" />
+                  Building scalable web applications
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Statement revealed by scrolling */}
+        <div
+          data-hero-statement
+          className="pointer-events-none invisible absolute inset-0 flex items-center justify-center px-6 opacity-0"
+        >
+          <p className="max-w-5xl text-center font-display text-[clamp(1.75rem,5vw,4.5rem)] font-extrabold uppercase leading-[1.02] tracking-tight text-white">
+            I turn ideas into <span className="text-orange">fast, scalable</span> &amp;{" "}
+            <span className="text-outline">beautiful</span> web experiences.
+          </p>
+        </div>
+
+        {/* Scroll hint */}
+        <div data-hero-out="down" className="absolute bottom-10 left-6 hidden md:left-10 lg:block">
+          <a
+            href="#about"
+            data-hero-fade
+            className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60 transition-colors hover:text-orange"
+          >
+            <span className="scroll-hint-line h-12 w-px bg-white/20" aria-hidden="true" />
+            Scroll
+          </a>
+        </div>
+
+        {/* Main Typewriter */}
+        <div data-hero-out="down" className="absolute bottom-24 left-0 w-full px-4 sm:bottom-16">
+          <div
+            data-hero-fade
+            className="text-center font-display text-xl font-bold uppercase tracking-tight sm:text-3xl md:text-5xl"
+          >
+            <Typewriter
+              options={{
+                strings: [
+                  "Full Stack Developer",
+                  "Laravel Developer",
+                  "Problem Solver",
+                  "Innovative Thinker",
+                ],
+                autoStart: true,
+                loop: true,
+                delay: 60,
+                deleteSpeed: 35,
+              }}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

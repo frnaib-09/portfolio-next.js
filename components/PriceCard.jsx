@@ -1,4 +1,7 @@
     import React from 'react'
+    import { Rocket, BriefcaseBusiness, Gem, ShoppingCart } from 'lucide-react'
+
+    const planIcons = [Rocket, BriefcaseBusiness, Gem, ShoppingCart]
 
     const PriceCard = () => {
         const pricingPlans = [
@@ -73,26 +76,68 @@
         ];
         return (
             <>
-                {pricingPlans.map((plan, index) => (
-                    <div key={index} className={`card ${plan.featured ? "border! border-orange/50!" : ""}`}>
+                {pricingPlans.map((plan, index) => {
+                    const PlanIcon = planIcons[index] ?? Rocket
+                    return (
+                    <div
+                        key={plan.name}
+                        data-tilt="5"
+                        className={`card glow-card group flex flex-col ${plan.featured ? "z-10 bg-orange/[0.07]! shadow-[0_30px_80px_-30px_rgba(255,102,2,0.45)] lg:scale-[1.04]" : ""}`}
+                    >
+                        {plan.featured && <span className="spin-border" aria-hidden="true" />}
+                        {plan.featured && (
+                            <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-orange/30 blur-[70px]"
+                            />
+                        )}
+                        <span
+                            aria-hidden="true"
+                            className="pointer-events-none absolute -bottom-8 -right-2 font-display text-[8rem] font-extrabold leading-none text-white/[0.03] transition-colors duration-500 group-hover:text-orange/[0.08]"
+                        >
+                            0{index + 1}
+                        </span>
                         {plan.MostPopular && (
-                            <span className="absolute -right-9 top-7 z-10 w-36 rotate-45 bg-orange py-1 text-center text-xs font-semibold text-white shadow-lg">
-                                Most Popular
+                            <span className="absolute -right-9 top-7 z-10 w-36 rotate-45 bg-orange py-1 text-center font-mono text-[10px] font-medium uppercase tracking-widest text-black shadow-lg">
+                                Popular
                             </span>
                         )}
-                        <h3 className={`text-lg font-bold mb-4 py-1 px-8 inline rounded-r-2xl absolute top-2 left-0 border border-white/10 bg-white/20 ${plan.featured ? "bg-orange! text-white! border-orange/50!" : ""}`}>{plan.name}</h3>
-                        <p className="text-3xl font-bold mt-6 mb-4">{plan.price}</p>
-                        <p className="text-gray-600 mb-4">{plan.description}</p>
-                        <ul className="space-y-2 mb-6">
-                            {plan.features.map((feature, featureIndex) => (
-                                <li key={featureIndex}><span className="text-orange pr-2">✓</span>{feature}</li>
+                        <div className="relative flex items-center gap-3">
+                            <span className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500 ease-expo group-hover:-rotate-8 group-hover:scale-110 ${plan.featured ? "border-orange bg-orange text-black" : "border-orange/25 bg-orange/10 text-orange group-hover:bg-orange group-hover:text-black"}`}>
+                                <PlanIcon size={19} strokeWidth={1.8} aria-hidden="true" />
+                            </span>
+                            <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-orange">
+                                {plan.name}
+                            </h3>
+                        </div>
+                        <p className="mt-6 whitespace-nowrap font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[1.65rem] xl:text-3xl">
+                            <span data-count={plan.price.replace("$", "")} data-decimals="2" data-prefix="$">
+                                {plan.price}
+                            </span>
+                        </p>
+                        <p className="mt-4 text-sm leading-6 text-white/55">{plan.description}</p>
+                        <div className="my-6 h-px bg-linear-to-r from-white/15 to-transparent" aria-hidden="true" />
+                        <ul data-reveal="pop" className="relative mb-8 space-y-3 text-sm text-white/80">
+                            {plan.features.map((feature) => (
+                                <li key={feature} className="flex items-start gap-3">
+                                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-orange" aria-hidden="true" />
+                                    {feature}
+                                </li>
                             ))}
                         </ul>
-                        <button className={`py-2 px-4 rounded-xl w-full ${plan.featured ? "bg-orange text-white transition-all duration-300 hover:bg-white hover:text-orange" : "bg-white/10 text-white hover:bg-white/20"}`}>
+                        <a
+                            href="#contact"
+                            className={`mt-auto block rounded-full py-3 px-4 text-center text-sm font-semibold transition-all duration-500 ease-expo ${
+                                plan.featured
+                                    ? "shine relative bg-orange text-black hover:bg-white"
+                                    : "border border-white/15 text-white hover:border-orange hover:bg-orange hover:text-black"
+                            }`}
+                        >
                             {plan.button}
-                        </button>
+                        </a>
                     </div>
-                ))}
+                    )
+                })}
             </>
         )
     }
