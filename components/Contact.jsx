@@ -2,8 +2,10 @@
 
 import React, { useState } from "react";
 import { FiArrowUpRight, FiSend, FiMapPin } from "react-icons/fi";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,16 +20,29 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (status === "sending") return;
+    setStatus("sending");
 
-    const mailto = `mailto:code.with.foyjur@gmail.com?subject=${encodeURIComponent(
-      formData.subject,
-    )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
-    )}`;
-
-    window.location.href = mailto;
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        { publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY },
+      );
+      setStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("error");
+    }
   };
 
   return (
@@ -210,14 +225,15 @@ const Contact = () => {
               {/* Submit */}
               <button
                 type="submit"
+                disabled={status === "sending"}
                 data-magnetic="0.12"
-                className="group relative isolate flex w-full items-center justify-between overflow-hidden rounded-full bg-orange px-6 py-4 text-sm font-semibold text-black transition-colors duration-500 hover:text-orange"
+                className="group relative isolate flex w-full items-center justify-between overflow-hidden rounded-full bg-orange px-6 py-4 text-sm font-semibold text-black transition-colors duration-500 hover:text-orange disabled:cursor-wait disabled:opacity-70"
               >
                 <span
                   aria-hidden="true"
                   className="absolute inset-0 -z-10 translate-y-full rounded-full bg-white transition-transform duration-500 ease-expo group-hover:translate-y-0"
                 />
-                <span>Send Message</span>
+                <span>{status === "sending" ? "Sending..." : "Send Message"}</span>
                 <FiArrowUpRight
                   size={20}
                   className="transition-transform duration-500 ease-expo group-hover:rotate-45"
@@ -225,8 +241,22 @@ const Contact = () => {
               </button>
             </form>
 
-            <p className="mt-5 text-center text-[10px] tracking-wide text-white/25">
-              I'll get back to you as soon as possible.
+            <p
+              role="status"
+              aria-live="polite"
+              className={`mt-5 text-center text-[10px] tracking-wide ${
+                status === "success"
+                  ? "text-green-400"
+                  : status === "error"
+                    ? "text-red-400"
+                    : "text-white/25"
+              }`}
+            >
+              {status === "success"
+                ? "Thanks! Your message has been sent — I'll get back to you soon."
+                : status === "error"
+                  ? "Something went wrong. Please try again or email me directly."
+                  : "I'll get back to you as soon as possible."}
             </p>
           </div>
         </div>
