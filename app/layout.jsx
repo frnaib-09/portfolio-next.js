@@ -47,7 +47,7 @@ export const metadata = {
     images: [SITE.image],
   },
   // Paste the Google Search Console HTML-tag code into the
-  // NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION env var on Vercel.
+  // NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION env var on Netlify.
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
     : undefined,
